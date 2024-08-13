@@ -27,11 +27,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public String getDataNascimento() {
+    public String getSobrenome() {
         return sobrenome;
     }
 
-    public void setDataNascimento(String sobrenome) {
+    public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
 }

@@ -1,10 +1,11 @@
 package org.hemmersonrosa.modelos;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,14 +18,20 @@ public class Video {
     private String diretor;
     private final LocalDate dataDeCriacao = LocalDate.now();
 
+    @XmlElementWrapper(name = "elenco")
+    @XmlElement(name = "pessoa")
+    @XmlJavaTypeAdapter(value = AdaptadorPessoa.class)
+    private List<Pessoa> elenco;
+
     public Video() {
     }
 
-    public Video(String titulo, String genero, Integer anoDeLancamento, String diretor) {
+    public Video(String titulo, String genero, Integer anoDeLancamento, String diretor, List<Pessoa> elenco) {
         this.titulo = titulo;
         this.genero = genero;
         this.anoDeLancamento = anoDeLancamento;
         this.diretor = diretor;
+        this.elenco = elenco;
     }
 
     public String getTitulo() {
@@ -61,5 +68,28 @@ public class Video {
 
     public LocalDate getDataDeCriacao() {
         return dataDeCriacao;
+    }
+
+    public List<Pessoa> getElenco() {
+        return elenco;
+    }
+
+    public void setElenco(List<Pessoa> elenco) {
+        this.elenco = elenco;
+    }
+
+    public static class AdaptadorPessoa extends XmlAdapter<String, Pessoa> {
+
+        @Override
+        public Pessoa unmarshal(String pessoa) throws Exception {
+            String nome = pessoa.split(" ")[0];
+            String sobrenome = pessoa.split(" ")[1];
+            return new Pessoa(nome, sobrenome);
+        }
+
+        @Override
+        public String marshal(Pessoa pessoa) throws Exception {
+            return pessoa.getNome()+" "+pessoa.getSobrenome();
+        }
     }
 }

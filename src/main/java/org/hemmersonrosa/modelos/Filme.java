@@ -8,17 +8,13 @@ public class Filme extends Video{
 
     private Integer duracao;
 
-    @XmlElementWrapper(name = "elenco")
-    @XmlElement(name = "pessoa")
-    private List<Pessoa> elenco;
 
     public Filme() {
     }
 
-    public Filme(String titulo, String genero, Integer anoDeLancamento, String diretor, Integer duracao, List<Pessoa> elenco) {
-        super(titulo, genero, anoDeLancamento, diretor);
+    public Filme(String titulo, String genero, Integer anoDeLancamento, String diretor, List<Pessoa> elenco, Integer duracao) {
+        super(titulo, genero, anoDeLancamento, diretor, elenco);
         this.duracao = duracao;
-        this.elenco = elenco;
     }
 
     public Integer getDuracao() {
@@ -27,13 +23,5 @@ public class Filme extends Video{
 
     public void setDuracao(Integer duracao) {
         this.duracao = duracao;
-    }
-
-    public List<Pessoa> getElenco() {
-        return elenco;
-    }
-
-    public void setElenco(List<Pessoa> elenco) {
-        this.elenco = elenco;
     }
 }

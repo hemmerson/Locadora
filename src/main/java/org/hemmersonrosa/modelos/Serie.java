@@ -6,16 +6,14 @@ public class Serie extends Video{
 
     private Integer numeroDeTemporadas;
     private Integer numeroDeEpisodios;
-    private List<String> elenco;
 
     public Serie() {
     }
 
-    public Serie(String titulo, String genero, Integer anoDeLancamento, String diretor, Integer numeroDeTemporadas, Integer numeroDeEpisodios, List<String> elenco) {
-        super(titulo, genero, anoDeLancamento, diretor);
+    public Serie(String titulo, String genero, Integer anoDeLancamento, String diretor, List<Pessoa> elenco, Integer numeroDeTemporadas, Integer numeroDeEpisodios) {
+        super(titulo, genero, anoDeLancamento, diretor, elenco);
         this.numeroDeTemporadas = numeroDeTemporadas;
         this.numeroDeEpisodios = numeroDeEpisodios;
-        this.elenco = elenco;
     }
 
     public Integer getNumeroDeTemporadas() {
@@ -32,13 +30,5 @@ public class Serie extends Video{
 
     public void setNumeroDeEpisodios(Integer numeroDeEpisodios) {
         this.numeroDeEpisodios = numeroDeEpisodios;
-    }
-
-    public List<String> getElenco() {
-        return elenco;
-    }
-
-    public void setElenco(List<String> elenco) {
-        this.elenco = elenco;
     }
 }
